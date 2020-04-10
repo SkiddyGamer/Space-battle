@@ -11,23 +11,33 @@ namespace Space_battle
     class Bullet : PictureBox
     {
         private Timer timerBulletMove;
+        int verVelocity = 0;
+        int horVelocity = 0;
+        int bulletstep = 5;
         
         public Bullet()
         {
             InitializeBullet();
+            InitializeTimerBulletMove();
         }
 
         private void InitializeTimerBulletMove()
         {
             timerBulletMove = new Timer();
             timerBulletMove.Interval = 20;
-            timerBulletMove.Start();
             timerBulletMove.Tick += new EventHandler(TimerBulletMove_Tick);
+            verVelocity = -bulletstep;
+            timerBulletMove.Start();
         }
 
         private void TimerBulletMove_Tick(object sender, EventArgs e)
         {
-
+            this.Top += verVelocity;
+            this.Left += horVelocity;
+            if(this.Top < 0)
+            {
+                this.Dispose();
+            }
         }
 
         private void InitializeBullet()
