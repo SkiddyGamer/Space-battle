@@ -10,9 +10,24 @@ namespace Space_battle
 {
     class Bullet : PictureBox
     {
+        private Timer timerBulletMove;
+        
         public Bullet()
         {
             InitializeBullet();
+        }
+
+        private void InitializeTimerBulletMove()
+        {
+            timerBulletMove = new Timer();
+            timerBulletMove.Interval = 20;
+            timerBulletMove.Start();
+            timerBulletMove.Tick += new EventHandler(TimerBulletMove_Tick);
+        }
+
+        private void TimerBulletMove_Tick(object sender, EventArgs e)
+        {
+
         }
 
         private void InitializeBullet()
