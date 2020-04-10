@@ -17,7 +17,7 @@ namespace Space_battle
 
         private void InitializeBullet()
         {
-            this.BackColor = Color.Coral;
+            this.BackColor = Color.Blue;
             this.Height = 10;
             this.Width = 10;
         }
