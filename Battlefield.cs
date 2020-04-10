@@ -44,6 +44,14 @@ namespace Space_battle
             {
                 FireBullet();
             }
+            else if(e.KeyCode == Keys.A)
+            {
+                spaceship.Left -= 10;    
+            }
+            else if(e.KeyCode == Keys.D)
+            {
+                spaceship.Left += 10;
+            }
         }
     }
 }
