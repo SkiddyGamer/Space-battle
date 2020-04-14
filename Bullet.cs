@@ -18,7 +18,7 @@ namespace Space_battle
         public Bullet()
         {
             InitializeBullet();
-            InitializeTimerBulletMove();
+            InitializeTimerBulletMove(); 
         }
 
         private void InitializeTimerBulletMove()
