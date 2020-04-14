@@ -23,6 +23,7 @@ namespace Space_battle
         {
             InitializeComponent();
             InitializeBattlefield();
+            InitializeMainTimer();
         }
 
         private void InitializeBattlefield()
@@ -37,13 +38,20 @@ namespace Space_battle
         {
             mainTimer = new Timer();
             mainTimer.Tick += new EventHandler(MainTimer_Tick);
-            mainTimer.Interval 20;
+            mainTimer.Interval = 20;
             mainTimer.Start();
         }
 
         private void MainTimer_Tick(object sender, EventArgs e)
         {
-
+            if (moveLeft)
+            {
+                spaceship.Left -= 10;
+            }
+            if (moveRight)
+            {
+                spaceship.Left += 10;
+            }
         }
 
         private void FireBullet()
@@ -57,17 +65,47 @@ namespace Space_battle
 
         private void Battlefield_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Space)
+            if (e.KeyCode == Keys.Space && !bulletFired)
             {
                 FireBullet();
+                bulletFired = true;
+            }
+            else if (e.KeyCode == Keys.A)
+            {
+                moveLeft = true;
+            }
+            else if (e.KeyCode == Keys.D)
+            {
+                moveRight = true;
+            }
+            else if (e.KeyCode == Keys.E)
+            {
+                if (spaceship.EngineState == "off")
+                {
+                    spaceship.EngineOn();
+                }
+                else if (spaceship.EngineState == "on")
+                {
+                    spaceship.EngineOff();
+                }
+            }
+
+
+        }
+
+        private void Battlefield_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Space)
+            {
+                bulletFired = false;
             }
             else if(e.KeyCode == Keys.A)
             {
-                spaceship.Left -= 10;    
+                moveLeft = false;
             }
             else if(e.KeyCode == Keys.D)
             {
-                spaceship.Left += 10;
+                moveRight = false; 
             }
         }
     }

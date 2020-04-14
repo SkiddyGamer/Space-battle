@@ -10,16 +10,56 @@ namespace Space_battle
 {
     class Spaceship : PictureBox
     {
+        private Timer timerAnimate = null;
+        private int imageCount = 1;
+        private string imageName;
+
+        public string EngineState { get; set; } = "off";
+
+
+
         public Spaceship()
         {
-            InitializeSpaceship();  
+            InitializeSpaceship();
+            InitializeTimerAnimate();
         }
 
         private void InitializeSpaceship()
         {
-            this.BackColor = Color.Salmon;
-            this.Height = 40;
-            this.Width = 100;
+            this.BackColor = Color.Transparent;
+            this.Height = 100;
+            this.Width = 50;
+            this.SizeMode = PictureBoxSizeMode.StretchImage;
+         // this.Image = Properties.Resources.rocketOff1;
         }
+
+        private void InitializeTimerAnimate()
+        {
+            timerAnimate = new Timer();
+            timerAnimate.Tick += new EventHandler(TimerAnimate_Tick);
+            timerAnimate.Interval = 100;
+            timerAnimate.Start();
+        }
+        private void TimerAnimate_Tick(object sender, EventArgs e)
+        {
+            imageName = "rocket_" + EngineState + "_" + imageCount;
+            this.Image = (Image)Properties.Resources.ResourceManager.GetObject(imageName);
+            imageCount += 1;
+            if (imageCount > 4)
+            {
+                imageCount = 1;
+            }
+        }
+
+        public void EngineOn()
+        {
+            EngineState = "on";
+        }
+
+        public void EngineOff()
+        {
+            EngineState = "off";
+        }
+
     }
 }
